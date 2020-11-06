@@ -1,6 +1,5 @@
 package fr.insee.habilitationexample.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.lang.NonNull;
 
 import lombok.EqualsAndHashCode;
@@ -10,6 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 @Getter
 @Setter
@@ -17,13 +20,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Personne{
+@Entity
+public class Joueur {
 	
 	@Id
+	@GeneratedValue
 	private Long id;
 	@NonNull
 	private String nom;
-	@NonNull
-	private String groupe;
 	
 }
