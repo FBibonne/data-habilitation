@@ -22,3 +22,15 @@ to the web application. The filter is detected by the servlet container (e.g tom
 ---
 
 ## Next
+
+- [ ] Add feature : if user is not authentified, let pass the request
+- [ ] Loading :
+  - [ ] late loading if tomcat instantiates the plugin before the master app
+  - [ ] Search configuration order :
+    1. In master application spring context 
+    2. In system properties
+    3. default configuration 
+- [ ] default implementations
+- [ ] externalise properties
+- [ ] doc (javadoc and "user manual") and test core classes
+- [ ] externalise plugin as a maven plugin (packages, project, pom, master app conf requirements)
