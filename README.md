@@ -42,6 +42,7 @@ to the web application. The filter is detected by the servlet container (e.g tom
   - [ ] Default ResourcesMatcher : default algorithm to check if two resources match
 - [ ] externalise properties
 - [ ] doc (javadoc and "user manual") and unit test core classes
+- [ ] Describe repository structure
 - [ ] Create docker images to test product in many architectures (spring app with embeded tomcat, 
 spring app with external tomcat, non spring app)
 - [ ] externalise plugin as a maven plugin (packages, project, pom, master app conf requirements)
