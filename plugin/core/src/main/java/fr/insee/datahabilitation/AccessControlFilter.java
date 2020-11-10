@@ -1,4 +1,4 @@
-package fr.insee.habilitationexample.controleacces;
+package fr.insee.datahabilitation;
 
 import lombok.extern.slf4j.Slf4j;
 

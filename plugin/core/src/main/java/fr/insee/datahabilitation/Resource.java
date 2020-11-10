@@ -1,4 +1,4 @@
-package fr.insee.habilitationexample.controleacces;
+package fr.insee.datahabilitation;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.util.Scanner;
 
 @Getter
 @RequiredArgsConstructor

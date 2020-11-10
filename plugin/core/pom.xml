@@ -11,38 +11,24 @@
 	</parent>
 
 	<groupId>fr.insee.datahabilitation</groupId>
-	<artifactId>data-habilitation-parent</artifactId>
+	<artifactId>data-habilitation-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
 	<description>Plugin for acces checking over datas</description>
-
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
 
 	</dependencies>
 
-	<modules>
-		<module>core</module>
-		<module>spring</module>
-		<module>tomcat</module>
-	</modules>
+	<build>
+
+	</build>
 
 </project>

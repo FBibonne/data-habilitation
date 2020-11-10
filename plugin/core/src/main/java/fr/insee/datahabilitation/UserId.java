@@ -1,4 +1,4 @@
-package fr.insee.habilitationexample.controleacces;
+package fr.insee.datahabilitation;
 
 import lombok.Getter;
 import lombok.NonNull;

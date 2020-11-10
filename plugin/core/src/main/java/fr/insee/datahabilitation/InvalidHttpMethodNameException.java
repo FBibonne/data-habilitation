@@ -1,4 +1,4 @@
-package fr.insee.habilitationexample.controleacces;
+package fr.insee.datahabilitation;
 
 public class InvalidHttpMethodNameException extends Exception {
     public InvalidHttpMethodNameException(String method) {
