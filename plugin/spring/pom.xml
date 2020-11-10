@@ -6,12 +6,11 @@
 
 	<parent>
 		<groupId>fr.insee.datahabilitation</groupId>
-		<artifactId>data-habilitation-parent</artifactId>
+		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>data-habilitation-spring</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>spring</artifactId>
 	<description>Registrer for the plugin in a spring web app</description>
 
 	<dependencies>

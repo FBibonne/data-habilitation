@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>fr.insee.datahabilitation</groupId>
-	<artifactId>data-habilitation-parent</artifactId>
+	<artifactId>parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>Plugin for acces checking over datas</description>
