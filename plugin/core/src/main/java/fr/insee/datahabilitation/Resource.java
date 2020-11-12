@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.EnumUtils;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.net.URI;
 import java.net.URISyntaxException;

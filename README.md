@@ -24,9 +24,15 @@ to the web application. The filter is detected by the servlet container (e.g tom
 ## Next
 
 - [ ] Registration of filter 
-  - [ ] order : this filter must be the last of the filter chain
-  - [ ] spring : this filter must be loaded wether the master app is a spring application or not
-    - [ ] so the runtime dependencies of the application must not contain spring web pacakges 
+  - [ ] order : this filter must be the last of the filter chain :
+    - [ ] with spring context
+    - [ ] with spring boot context
+    - [ ] without spring context
+  - [ ] load the filter with spring utils when the master app is a spring app :
+    - [ ] not spring (without loading spring stuff) 
+      - [X] so the runtime dependencies of the application must not contain spring web pacakges
+    - [ ] spring
+    - [ ] spring boot
 - [ ] Add feature : if user is not authentified, let pass the request
 - [ ] Loading :
   - [ ] late loading if tomcat instantiates the plugin before the master app
@@ -45,4 +51,7 @@ to the web application. The filter is detected by the servlet container (e.g tom
 - [ ] Describe repository structure
 - [ ] Create docker images to test product in many architectures (spring app with embeded tomcat, 
 spring app with external tomcat, non spring app)
-- [ ] externalise plugin as a maven plugin (packages, project, pom, master app conf requirements)
+- [X] externalise plugin as a maven plugin 
+- [ ] Split in packages
+- [ ] Define master app conf requirements
+- [ ] Specify null/nullables arguments dans fields

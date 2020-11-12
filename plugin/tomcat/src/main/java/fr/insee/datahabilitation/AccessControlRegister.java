@@ -1,11 +1,14 @@
 package fr.insee.datahabilitation;
 
+import lombok.NonNull;
+import org.springframework.lang.Nullable;
+
 import javax.servlet.*;
 import javax.servlet.annotation.HandlesTypes;
 import java.util.EnumSet;
 import java.util.Set;
 
-@HandlesTypes(MonFiltre.class)
+@HandlesTypes(AccessControlFilter.class)
 public class AccessControlRegister implements ServletContainerInitializer {
 
     /*
@@ -21,7 +24,7 @@ public class AccessControlRegister implements ServletContainerInitializer {
 
      */
     @Override
-    public void onStartup(@Nullable Set<Class<?>> webAppInitializerClasses, ServletContext ctx) throws ServletException {
+    public void onStartup(@Nullable Set<Class<?>> webAppInitializerClasses, @NonNull ServletContext ctx) throws ServletException {
             FilterRegistration.Dynamic registration = ctx.addFilter("accessControlFilter", new AccessControlFilter());
             registration.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class),true, "/*");
             registration.setAsyncSupported(true);

@@ -1,5 +1,6 @@
 package fr.insee.habilitationexample;
 
+import fr.insee.datahabilitation.AccessControlRegister;
 import fr.insee.habilitationexample.model.Equipe;
 import fr.insee.habilitationexample.model.Joueur;
 import fr.insee.habilitationexample.service.EquipeRepository;
@@ -8,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.SpringServletContainerInitializer;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication
-@ServletComponentScan
+@SpringBootApplication(scanBasePackages = {"fr.insee.habilitationexample", "fr.insee.datahabilitation"})
 public class HabilitationExampleApplication {
 	
 	@Autowired 

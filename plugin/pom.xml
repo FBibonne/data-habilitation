@@ -43,6 +43,7 @@
 		<module>core</module>
 		<module>spring</module>
 		<module>tomcat</module>
+		<module>spring-boot</module>
 	</modules>
 
 </project>

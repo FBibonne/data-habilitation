@@ -6,6 +6,9 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -19,6 +22,12 @@ public class AccessControlFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         log.info("Entrée de :"+req.getMethod()+ " "+req.getRequestURI());
+        for (Iterator<String> it = req.getAttributeNames().asIterator(); it.hasNext(); ) {
+            String attributeName = it.next();
+            log.info(attributeName+" = "+req.getAttribute(attributeName));
+        }
+        req.getHeaderNames().asIterator().forEachRemaining(s->log.info(s+" = "+req.getHeader(s)));
+        Arrays.stream(Thread.currentThread().getStackTrace()).map(StackTraceElement::toString).forEach(log::info);
         try{
             if (checkAccess(req)){
                 chain.doFilter(request, response);
