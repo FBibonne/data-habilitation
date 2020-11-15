@@ -15,16 +15,16 @@ import java.net.URISyntaxException;
 public class Resource {
 
     @NonNull
-    private RequestMethod method;
+    private HttpmethodForRequest method;
     @NonNull
     private URI resourcePath;
 
     public Resource(@NonNull String method, @NonNull String requestURI) throws InvalidHttpMethodNameException, InvalidResourcePathException {
 
-        if (! EnumUtils.isValidEnum(RequestMethod.class,method)){
+        if (! EnumUtils.isValidEnum(HttpmethodForRequest.class,method)){
             throw new InvalidHttpMethodNameException(method);
         }
-        this.method=RequestMethod.valueOf(method);
+        this.method= HttpmethodForRequest.valueOf(method);
         try {
             this.resourcePath= new URI(null, null, requestURI, null);
         } catch (URISyntaxException e) {

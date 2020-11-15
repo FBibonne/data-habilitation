@@ -1,14 +1,17 @@
 package fr.insee.datahabilitation;
 
+import fr.insee.datahabilitation.utils.StreamUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Iterator;
+import java.util.Enumeration;
+import java.util.Spliterator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -16,18 +19,16 @@ public class AccessControlFilter implements Filter {
 
     private UserIdFinder userIdFinder;
     private ResourcesAllowedService resourcesAllowedService;
-    private ResourcesMatcher resourcesMatcher;
+    private AllowedResourcesMatcherBuilder allowedResourcesMatcherBuilder;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException{
         HttpServletRequest req = (HttpServletRequest) request;
         log.info("Entrée de :"+req.getMethod()+ " "+req.getRequestURI());
-        for (Iterator<String> it = req.getAttributeNames().asIterator(); it.hasNext(); ) {
-            String attributeName = it.next();
-            log.info(attributeName+" = "+req.getAttribute(attributeName));
+        if (log.isDebugEnabled()){
+            log.debug(attributesOrHeadersToString(req::getHeaderNames, req::getHeader));
+            log.debug(attributesOrHeadersToString(req::getAttributeNames, req::getAttribute));
         }
-        req.getHeaderNames().asIterator().forEachRemaining(s->log.info(s+" = "+req.getHeader(s)));
-        Arrays.stream(Thread.currentThread().getStackTrace()).map(StackTraceElement::toString).forEach(log::info);
         try{
             if (checkAccess(req)){
                 chain.doFilter(request, response);
@@ -42,20 +43,30 @@ public class AccessControlFilter implements Filter {
         log.info("Sortie de :"+response);
     }
 
-    private boolean checkAccess(HttpServletRequest req) throws Exception{
+    private String attributesOrHeadersToString(Supplier<Enumeration<String>> source, Function<String, Object> keyMapper) {
+        return StreamUtils.enumerationToParallelisableStream(source.get(),
+                Spliterator.CONCURRENT, Spliterator.SUBSIZED )
+                .map(s->s+" = "+keyMapper.apply(s)).collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    private boolean checkAccess(HttpServletRequest req) throws InvalidHttpMethodNameException, InvalidResourcePathException{
 
         UserId userId = userIdFinder.find(req);
-        ResourcesAllowed resourcesAllowed =  resourcesAllowedService.findByUserId(userId);
-        Resource resourceTarget =new Resource(req.getMethod(), req.getRequestURI());
-        return resourcesMatcher.checkIf(resourceTarget).match(resourcesAllowed);
+        if(userId.isNotAuthentified()){
+            return true;
+        }else{
+            ResourcesAllowed resourcesAllowed =  resourcesAllowedService.findByUserId(userId);
+            Resource resourceTarget =new Resource(req.getMethod(), req.getRequestURI());
+            return allowedResourcesMatcherBuilder.checkIf(resourceTarget).match(resourcesAllowed);
+        }
+
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.info("INIT controle accès");
-        userIdFinder = (request)->new UserId("user");
+        userIdFinder = new DefaultUserIdFinder();
         resourcesAllowedService=(userId)->new ResourcesAllowed() {
-
             @Override
             public Stream<Resource> resources() {
                 try{
@@ -69,7 +80,12 @@ public class AccessControlFilter implements Filter {
                 }
             }
         };
-        resourcesMatcher=Resource::equals;
+        allowedResourcesMatcherBuilder =new AllowedResourcesMatcherBuilder() {
+            @Override
+            public ResourceMatcher matcher() {
+                return Resource::equals;
+            }
+        };
     }
 
     @Override

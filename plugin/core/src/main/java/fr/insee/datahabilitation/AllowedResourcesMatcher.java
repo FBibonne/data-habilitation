@@ -4,10 +4,10 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class MatcherWithTarget {
+public class AllowedResourcesMatcher {
 
     @NonNull
-    private ResourcesMatcher resourceMatcher;
+    private ResourceMatcher resourceMatcher;
     @NonNull
     private Resource targetResource;
 
