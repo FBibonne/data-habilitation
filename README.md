@@ -55,3 +55,6 @@ spring app with external tomcat, non spring app)
 - [ ] Split in packages
 - [ ] Define master app conf requirements
 - [ ] Specify null/nullables arguments dans fields
+- [ ] Make example app with keycloak open source
+- [ ] Return 404 instead of 403 if url doesn't exist
+- [ ] Specify specific annotations for master app (annotations )

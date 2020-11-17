@@ -9,13 +9,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.StreamSupport;
 
 @SpringBootApplication(scanBasePackages = {"fr.insee.habilitationexample", "fr.insee.datahabilitation"})
-public class HabilitationExampleApplication {
+public class HabilitationExampleApplicationKeycloak {
 	
 	@Autowired 
 	private EquipeRepository equipeRepository;
@@ -23,7 +19,7 @@ public class HabilitationExampleApplication {
 	private JoueurRepository joueurRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(HabilitationExampleApplication.class, args);
+		SpringApplication.run(HabilitationExampleApplicationKeycloak.class, args);
 	}
 
 

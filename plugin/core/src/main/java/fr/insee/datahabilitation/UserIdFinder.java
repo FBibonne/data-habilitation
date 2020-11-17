@@ -4,6 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserIdFinder {
 
-    UserId find(HttpServletRequest req);
+    UserId find(HttpServletRequest req) throws UnexpectedDataForAuthentificationException;
 
 }

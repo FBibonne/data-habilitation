@@ -35,7 +35,7 @@ public class AccessControlFilter implements Filter {
             }else{
                 ((HttpServletResponse)response).sendError(403);
             }
-        }catch(Exception e){
+        }catch(Exception | UnexpectedDataForAuthentificationException e){
             log.error("Error in processing access check (see causes)", e);
             ((HttpServletResponse)response).sendError(500, "Error in processing access check : "+e.getMessage());
         }
@@ -49,7 +49,7 @@ public class AccessControlFilter implements Filter {
                 .map(s->s+" = "+keyMapper.apply(s)).collect(Collectors.joining(System.lineSeparator()));
     }
 
-    private boolean checkAccess(HttpServletRequest req) throws InvalidHttpMethodNameException, InvalidResourcePathException{
+    private boolean checkAccess(HttpServletRequest req) throws InvalidHttpMethodNameException, InvalidResourcePathException, UnexpectedDataForAuthentificationException {
 
         UserId userId = userIdFinder.find(req);
         if(userId.isNotAuthentified()){
