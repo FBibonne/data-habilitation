@@ -66,3 +66,4 @@ spring app with external tomcat, non spring app)
 - [ ] Make example app with keycloak open source
 - [ ] Return 404 instead of 403 if url doesn't exist
 - [ ] Specify specific annotations for master app (annotations )
+- [ ] Don't use HttpServletRequest.getAuthType to seek the authentification
