@@ -21,6 +21,14 @@ to the web application. The filter is detected by the servlet container (e.g tom
 >must add the `@ServletComponentScan` annotation
 ---
 
+## Try it
+
+- run the server of an example app
+- try a request with curl, for example with token for keycloak authentification :
+```
+curl "http://localhost:8080/equipes" --compressed -H "Authorization: Bearer $TOKEN"
+```
+
 ## Next
 
 - [ ] Registration of filter 
